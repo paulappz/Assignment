@@ -4,6 +4,8 @@ function NotesApplication(author){
 	// Create a notes list,then store all the notes as an instance property.
 	this.notes = [];
 
+	"use strict"
+	
 	//  function create(note_content) takes the note content as the parameter and adds it to the notes list of  object.
 	this.create = function(note_content){
 		this.notes.push(note_content);
@@ -13,10 +15,10 @@ function NotesApplication(author){
 	The note_id parameter below represents the respective index of each of the items in the list, 
 	the NOTE_CONTENT represent the note content and the author represents the note author.*/
 	this.listNotes  = function () {
-		for(var index = 0; index < this.notes.length; index++) {
+		for(var i = 0; i < this.notes.length; i++) {
 			console.log(
-				"Note ID: " + index + "\n" +
-				this.notes[index] + "\n" +
+				"Note ID: " + i + "\n" +
+				this.notes[i] + "\n" +
 				"By Author: " + this.author + "\n\n"
 			);
 			
@@ -31,27 +33,56 @@ function NotesApplication(author){
 	
 	/* search(search_text)function take a search string, search_text and returns all the 
 	notes with that text within it in the following format*/
-	this.search = function (search_text) {
+	this.search = function (searchText) {
 		result = [];
-		//var index;
-		for(index = 0; index < this.notes.length; index++) {
-			if (this.notes[index].includes(search_text)) {
-				result.push(this.notes[index]);
-			}
-		}
-		return result;
+	var j=0;
+	
+		this.notes.forEach(function(el, i) {
+			if(el.indexOf(searchText)> -1)
+				result.push({id:i, note: el});
+		});
+		var heading = "\nShowing result for search text "+ searchText+ "\n";
+		var content = "";
+		var that = this;
+		result.map(function(el) {
+			content += "\nNote ID: "+ el.id + "\n"+
+			el.note + "\n"+
+			"By Author: "+ that.author+"\n";
+		});
+		return heading+content;
+
+		
+	};
+		/* edit(edit_text)function take two input(note_id and new_content)*/
+	this.edit= function(note_id,new_content){
+		this.notes[note_id]= new_content;
+	};
+	
+	this.delete = function(note_id){
+		this.notes.slice(note_id, 1);
+		
 	};
 }
 
 	
 
-var paul = new NotesApplication("paul");
+/* var paul = new NotesApplication("paul");
 
 paul.create("PAUL is an Andelan");
 paul.create("I love Javascript");
+paul.create("You love Java");
 
 paul.listNotes();
-console.log(paul.get(1));
 console.log(paul.get(0));
+console.log(paul.get(1));
 
-console.log(paul.search("Andelan"));
+paul.edit(0,"Sade is an Andelan");
+
+console.log(paul.search("java"));
+
+paul.listNotes();
+
+paul.delete(0);
+
+paul.listNotes();
+ */
