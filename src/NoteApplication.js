@@ -1,88 +1,70 @@
-function NotesApplication(author){
+function NotesApplication(author) {
 	// Take in a parameter author  of the note and saves this as an instance variable
 	this.author = author;
 	// Create a notes list,then store all the notes as an instance property.
 	this.notes = [];
 
 	"use strict"
-	
+
 	//  function create(note_content) takes the note content as the parameter and adds it to the notes list of  object.
-	this.create = function(note_content){
-		this.notes.push(note_content);
+	this.create = function(noteContent) {
+		this.notes.push(noteContent);
 	};
 
 	/* listNotes() function lists out each of the notes in the notes list in the following format. 
 	The note_id parameter below represents the respective index of each of the items in the list, 
 	the NOTE_CONTENT represent the note content and the author represents the note author.*/
-	this.listNotes  = function () {
-		for(var i = 0; i < this.notes.length; i++) {
+	this.listNotes = function() {
+		for (var i = 0; i < this.notes.length; i++) {
 			console.log(
 				"Note ID: " + i + "\n" +
 				this.notes[i] + "\n" +
 				"By Author: " + this.author + "\n\n"
 			);
-			
+
 		}
 	};
-	
-	/* get(note_id) function takes a note_id which refers to the index of the note in the notes
+
+	/* get(noteId) function takes a noteId which refers to the index of the note in the notes
 	list and returns the content of that note as a string.*/
-	this.get = function (note_id) {
-		return this.notes[note_id];
+	this.get = function(noteId) {
+		return this.notes[noteId];
 	};
-	
+
 	/* search(search_text)function take a search string, search_text and returns all the 
 	notes with that text within it in the following format*/
-	this.search = function (searchText) {
+	this.search = function(searchText) {
 		result = [];
-	var j=0;
-	
+		var j = 0;
+
 		this.notes.forEach(function(el, i) {
-			if(el.indexOf(searchText)> -1)
-				result.push({id:i, note: el});
+			if (el.indexOf(searchText) > -1)
+				result.push({
+					id: i,
+					note: el
+				});
 		});
-		var heading = "\nShowing result for search text "+ searchText+ "\n";
+		var heading = "\nShowing result for search text " + searchText + "\n";
 		var content = "";
 		var that = this;
 		result.map(function(el) {
-			content += "\nNote ID: "+ el.id + "\n"+
-			el.note + "\n"+
-			"By Author: "+ that.author+"\n";
+			content += "\nNote ID: " + el.id + "\n" +
+				el.note + "\n" +
+				"By Author: " + that.author + "\n";
 		});
-		return heading+content;
+		return heading + content;
 
-		
+
 	};
-		/* edit(edit_text)function take two input(note_id and new_content)*/
-	this.edit= function(note_id,new_content){
-		this.notes[note_id]= new_content;
+	/* edit(edit_text)function take two input(note_id and new_content)*/
+	this.edit = function(noteId, newContent) {
+		this.notes[noteId] = newContent;
 	};
-	
-	this.delete = function(note_id){
-		this.notes.slice(note_id, 1);
-		
+	/* delete(delete_text)function take a input(note_id )*/
+	this.delete = function(noteId) {
+		this.notes.splice(noteId, 1);
+
+
+
 	};
 }
-
-	
-
-/* var paul = new NotesApplication("paul");
-
-paul.create("PAUL is an Andelan");
-paul.create("I love Javascript");
-paul.create("You love Java");
-
-paul.listNotes();
-console.log(paul.get(0));
-console.log(paul.get(1));
-
-paul.edit(0,"Sade is an Andelan");
-
-console.log(paul.search("java"));
-
-paul.listNotes();
-
-paul.delete(0);
-
-paul.listNotes();
- */
