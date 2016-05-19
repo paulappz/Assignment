@@ -1,10 +1,13 @@
+
+"use strict"
+
 function NotesApplication(author) {
 	// Take in a parameter author  of the note and saves this as an instance variable
 	this.author = author;
 	// Create a notes list,then store all the notes as an instance property.
 	this.notes = [];
 
-	"use strict"
+	
 
 	//  function create(note_content) takes the note content as the parameter and adds it to the notes list of  object.
 	this.create = function(noteContent) {
