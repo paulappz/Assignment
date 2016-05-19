@@ -37,7 +37,7 @@ function NotesApplication(author) {
 	/* search(search_text)function take a search string, search_text and returns all the 
 	notes with that text within it in the following format*/
 	this.search = function(searchText) {
-		result = [];
+		var result = [];
 		var j = 0;
 
 		this.notes.forEach(function(el, i) {
@@ -71,3 +71,25 @@ function NotesApplication(author) {
 
 	};
 }
+
+// RUNING CODE//
+
+var paul = new NotesApplication("paul");
+
+paul.create("PAUL is an Andelan");
+paul.create("I love Javascript");
+paul.create("You love Java");
+
+paul.listNotes();
+console.log(paul.get(0));
+console.log(paul.get(1));
+
+paul.edit(0,"Sade is an Andelan");
+
+console.log(paul.search("Java"));
+
+paul.listNotes();
+
+paul.delete(0);
+
+paul.listNotes();
